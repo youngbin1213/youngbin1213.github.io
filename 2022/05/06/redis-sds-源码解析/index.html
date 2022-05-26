@@ -5,7 +5,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="redis sds 源码解析, 飞鸿踏雪泥">
-    <meta name="description" content="">
+    <meta name="description" content="sds 基础一些基础知识来源于 《redis设计与实现》
+sds用途
+字符串值
+缓冲区
+
+sds结构struct __attribute__ ((__packed__)) sdshdr8 &amp;#123;
+    uint8_t len; /*">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -309,7 +315,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/ava2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -428,12 +434,29 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/redis/">
+                                <span class="chip bg-color">redis</span>
+                            </a>
+                        
+                            <a href="/tags/redis-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">
+                                <span class="chip bg-color">redis 源码解析</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/distribute/" class="post-category">
+                                distribute
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -458,12 +481,77 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h1 id="sds-基础"><a href="#sds-基础" class="headerlink" title="sds 基础"></a>sds 基础</h1><p>一些基础知识来源于 《redis设计与实现》</p>
+<h2 id="sds用途"><a href="#sds用途" class="headerlink" title="sds用途"></a>sds用途</h2><ul>
+<li>字符串值</li>
+<li>缓冲区</li>
+</ul>
+<h2 id="sds结构"><a href="#sds结构" class="headerlink" title="sds结构"></a>sds结构</h2><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">struct</span> <span class="token keyword">__attribute__</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>__packed__<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token class-name">sdshdr8</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">uint8_t</span> len<span class="token punctuation">;</span> <span class="token comment">/* 已使用的长度 */</span>
+    <span class="token class-name">uint8_t</span> alloc<span class="token punctuation">;</span> <span class="token comment">/* 不包含头部和空终止符号(\0) */</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">char</span> flags<span class="token punctuation">;</span> <span class="token comment">/* 3位最低有效位表示类型, 其余5个比特位未被使用 */</span>
+    <span class="token keyword">char</span> buf<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token keyword">__attribute__</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>__packed__<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token class-name">sdshdr16</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">uint16_t</span> len<span class="token punctuation">;</span> <span class="token comment">/* 已使用的长度 */</span>
+    <span class="token class-name">uint16_t</span> alloc<span class="token punctuation">;</span> <span class="token comment">/* 不包含头部和空终止符号 */</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">char</span> flags<span class="token punctuation">;</span> <span class="token comment">/* 3位最低有效位表示类型, 其余5个比特位未被使用 */</span>
+    <span class="token keyword">char</span> buf<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="flag字段"><a href="#flag字段" class="headerlink" title="flag字段"></a>flag字段</h3><p>sds一共分为 <code>sdshdr8</code>、<code>sdshdr16</code>、<code>sdshdr32</code>、<code>sdshdr64</code>， <code>sdshdr5</code>存在，但并未使用。因而一共五种类型，需要3比特位，因而注释提到 <strong>3位最低有效位表示类型, 其余5个比特位未被使用</strong></p>
+<h3 id="len、alloc字段"><a href="#len、alloc字段" class="headerlink" title="len、alloc字段"></a>len、alloc字段</h3><p>len ：已使用的长度</p>
+<p>alloc: 分配的长度，也就是 buf的长度（不包括空终止符）</p>
+<p><code>sdshdr8</code>、<code>sdshdr16</code>、<code>sdshdr32</code>、<code>sdshdr64</code> 的区别仅在于 len 和 alloc的类型 分别为:</p>
+<blockquote>
+<p><code>sdshdr8</code>: uint8_t</p>
+<p><code>sdshdr16</code>: uint16_t</p>
+<p><code>sdshdr32</code>: uint32_t</p>
+<p><code>sdshdr64</code>: uint64_t</p>
+</blockquote>
+<p>源码中sdshdr8 代表着 该sds最大长度为 <code>1&lt;&lt;8-1</code></p>
+<h2 id="sdsupdatelen、sdsclear-函数"><a href="#sdsupdatelen、sdsclear-函数" class="headerlink" title="sdsupdatelen、sdsclear 函数"></a>sdsupdatelen、sdsclear 函数</h2><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* s = sdsnew("foobar");
+ * s[2] = '\0';
+ * sdsupdatelen(s);
+ * printf("%d\n", sdslen(s));
+ *
+ * 输出将会是 "2", 但如果我们注释掉 对sdsupdatelen() 的调用
+ * 输出将会是 "6" 因为字符串虽被修改, 但逻辑长度 (头部信息) 仍然是6字节. */</span>
+<span class="token keyword">void</span> <span class="token function">sdsupdatelen</span><span class="token punctuation">(</span>sds s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">size_t</span> reallen <span class="token operator">=</span> <span class="token function">strlen</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">sdssetlen</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> reallen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* 比较简单 ,不做解释*/</span>
+<span class="token keyword">void</span> <span class="token function">sdsclear</span><span class="token punctuation">(</span>sds s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">sdssetlen</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token char">'\0'</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="sds-相关函数及其功能"><a href="#sds-相关函数及其功能" class="headerlink" title="sds 相关函数及其功能"></a>sds 相关函数及其功能</h2><p><strong>重点关注的是功能，函数只是一种实现的手段</strong></p>
+<h3 id="空间预分配"><a href="#空间预分配" class="headerlink" title="空间预分配"></a>空间预分配</h3><p>sds 通过字段 len 管理已经分配的字段 </p>
+<p>相关函数</p>
+<ul>
+<li><p><code>_sdsnewlen</code>：创建sds字符串</p>
+</li>
+<li><p><code>_sdsMakeRoomFor</code>：动态扩展（扩展策略 ：*2）</p>
+</li>
+<li><p><code>sdsRemoveFreeSpace</code>：清除多余的（未使用的）len</p>
+</li>
+</ul>
+
                 
             </div>
             <hr/>
@@ -526,7 +614,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
+                            
+                                <a href="/tags/redis/">
+                                    <span class="chip bg-color">redis</span>
+                                </a>
+                            
+                                <a href="/tags/redis-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">
+                                    <span class="chip bg-color">redis 源码解析</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -577,7 +673,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="redis 源码解析预备知识">
+                        <img src="/medias/featureimages/4.png" class="responsive-img" alt="redis 源码解析预备知识">
                         
                         <span class="card-title">redis 源码解析预备知识</span>
                     </div>
@@ -630,7 +726,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="vscode c++ 配置">
+                        <img src="/medias/featureimages/1.png" class="responsive-img" alt="vscode c++ 配置">
                         
                         <span class="card-title">vscode c++ 配置</span>
                     </div>

@@ -8,7 +8,10 @@
     <meta name="description" content="安装msysmsys可以理解成 windows下的集成的一个Linux 终端 
 安装跟着 官网教程即可
 在msys中安装wingw64 、python 、vim指令：
-1234# 首先更新msys库pacman -Sy#安装pythonpa">
+# 首先更新msys库
+pacman -Sy
+#安装python
+pac">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -312,7 +315,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -478,6 +481,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -486,7 +492,10 @@
                 <h1 id="安装msys"><a href="#安装msys" class="headerlink" title="安装msys"></a>安装msys</h1><p>msys可以理解成 windows下的集成的一个<code>Linux 终端</code> </p>
 <p>安装跟着 官网教程即可</p>
 <p>在msys中安装wingw64 、python 、vim指令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先更新msys库</span></span><br><span class="line">pacman -Sy</span><br><span class="line"><span class="comment">#安装python</span></span><br><span class="line">pacman -S python</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 首先更新msys库</span>
+pacman -Sy
+<span class="token comment">#安装python</span>
+pacman -S python<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
@@ -499,7 +508,28 @@
 <p><strong>和网上教程所示不同，只有\msys\usr\里的include文件夹才能够引入正确的c++库</strong></p>
 <p>原因尚且不清楚，但先记录下来</p>
 <h3 id="其它错误记录"><a href="#其它错误记录" class="headerlink" title="其它错误记录"></a>其它错误记录</h3><p>记录 c++ configuration</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;configurations&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Win32&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;includePath&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;D:\\studyApp\\msys\\usr\\include&quot;</span><span class="punctuation">,</span></span><br><span class="line">                </span><br><span class="line">                <span class="string">&quot;$&#123;workspaceFolder&#125;/**&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;compilerPath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;D:\\studyApp\\msys\\mingw64\\bin\\g++.exe&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;defines&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;_DEBUG&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;UNICODE&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;_UNICODE&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;cStandard&quot;</span><span class="punctuation">:</span> <span class="string">&quot;c11&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;cppStandard&quot;</span><span class="punctuation">:</span> <span class="string">&quot;c++17&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;intelliSenseMode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;gcc-x64&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="number">4</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+    <span class="token property">"configurations"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Win32"</span><span class="token punctuation">,</span>
+            <span class="token property">"includePath"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"D:\\studyApp\\msys\\usr\\include"</span><span class="token punctuation">,</span>
+                
+                <span class="token string">"$&#123;workspaceFolder&#125;/**"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"compilerPath"</span><span class="token operator">:</span> <span class="token string">"D:\\studyApp\\msys\\mingw64\\bin\\g++.exe"</span><span class="token punctuation">,</span>
+            <span class="token property">"defines"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"_DEBUG"</span><span class="token punctuation">,</span>
+                <span class="token string">"UNICODE"</span><span class="token punctuation">,</span>
+                <span class="token string">"_UNICODE"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"cStandard"</span><span class="token operator">:</span> <span class="token string">"c11"</span><span class="token punctuation">,</span>
+            <span class="token property">"cppStandard"</span><span class="token operator">:</span> <span class="token string">"c++17"</span><span class="token punctuation">,</span>
+            <span class="token property">"intelliSenseMode"</span><span class="token operator">:</span> <span class="token string">"gcc-x64"</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"version"</span><span class="token operator">:</span> <span class="token number">4</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
@@ -634,7 +664,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="redis sds 源码解析">
+                        <img src="/medias/featureimages/ava2.jpg" class="responsive-img" alt="redis sds 源码解析">
                         
                         <span class="card-title">redis sds 源码解析</span>
                     </div>
@@ -651,11 +681,27 @@
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            young
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/distribute/" class="post-category">
+                                    distribute
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/redis/">
+                        <span class="chip bg-color">redis</span>
+                    </a>
+                    
+                    <a href="/tags/redis-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">
+                        <span class="chip bg-color">redis 源码解析</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -671,7 +717,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="redis compile">
+                        <img src="/medias/featureimages/ava1.jpg" class="responsive-img" alt="redis compile">
                         
                         <span class="card-title">redis compile</span>
                     </div>

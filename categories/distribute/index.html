@@ -365,20 +365,29 @@
                 
                 
                 
+                <a href="/categories/Linux-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="Linux 源码解析: 3">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F9EBEA;">Linux 源码解析
+                        <span class="tag-length">3</span>
+                    </span>
+                </a>
+                
+                
                 <a href="/categories/%E9%9A%8F%E7%AC%94%E6%9D%82%E8%B0%88/" title="随笔杂谈: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F9EBEA;">随笔杂谈
+                            style="background-color: #F5EEF8;">随笔杂谈
                         <span class="tag-length">1</span>
                     </span>
                 </a>
                 
                 
-                <a href="/categories/distribute/" title="distribute: 3">
+                <a href="/categories/distribute/" title="distribute: 5">
                     <span class="chip center-align waves-effect waves-light
                              chip-active "
-                            style="background-color: #F5EEF8;">distribute
-                        <span class="tag-length">3</span>
+                            style="background-color: #D5F5E3;">distribute
+                        <span class="tag-length">5</span>
                     </span>
                 </a>
                 
@@ -386,7 +395,7 @@
                 <a href="/categories/windows/" title="windows: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #D5F5E3;">windows
+                            style="background-color: #E8F8F5;">windows
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -405,11 +414,63 @@
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="/2022/05/17/%E9%AB%98%E5%B9%B6%E5%8F%91%E5%B9%82%E7%AD%89/">
+                        <div class="card-image tag-image">
+                            
+                            
+                            <img src="/medias/featureimages/4.png" class="responsive-img" alt="高并发幂等">
+                            
+                            <span class="card-title">高并发幂等</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                高并发下的接口幂等性来源： 公众号 Java基基
+https://mp.weixin.qq.com/s/b44PQCSpdH5cXYKOjwKY5w
+幂等性的概念在编程中.一个幂等操作的特点是其任意多次执行所产生的影响均与一次执行的影响相同
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-17
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/distribute/" class="post-category">
+                                    distribute
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E9%9D%A2%E8%AF%95/">
+                            <span class="chip bg-color">面试</span>
+                        </a>
+                        
+                        <a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/">
+                            <span class="chip bg-color">高并发</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="/2022/05/06/redis-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86/">
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="redis 源码解析预备知识">
+                            <img src="/medias/featureimages/4.png" class="responsive-img" alt="redis 源码解析预备知识">
                             
                             <span class="card-title">redis 源码解析预备知识</span>
                         </div>
@@ -417,7 +478,10 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                操作系统相关知识C语法知识
+                                操作系统相关知识C语法知识#define SDS_HDR(T,s) ((struct sdshdr##T *)((s)-(sizeof(struct sdshdr##T))))
+
+宏定义中的##，可以起到类似于动态编译的效果
+attribu
                             
                         </div>
                         <div class="publish-info">
@@ -455,11 +519,67 @@
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="/2022/05/06/redis-sds-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">
+                        <div class="card-image tag-image">
+                            
+                            
+                            <img src="/medias/featureimages/ava2.jpg" class="responsive-img" alt="redis sds 源码解析">
+                            
+                            <span class="card-title">redis sds 源码解析</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                sds 基础一些基础知识来源于 《redis设计与实现》
+sds用途
+字符串值
+缓冲区
+
+sds结构struct __attribute__ ((__packed__)) sdshdr8 &#123;
+    uint8_t len; /*
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-06
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/distribute/" class="post-category">
+                                    distribute
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/redis/">
+                            <span class="chip bg-color">redis</span>
+                        </a>
+                        
+                        <a href="/tags/redis-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">
+                            <span class="chip bg-color">redis 源码解析</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="/2022/05/04/redis-compile/">
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="redis compile">
+                            <img src="/medias/featureimages/ava1.jpg" class="responsive-img" alt="redis compile">
                             
                             <span class="card-title">redis compile</span>
                         </div>
@@ -505,7 +625,7 @@
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="test1">
+                            <img src="/medias/featureimages/3.png" class="responsive-img" alt="test1">
                             
                             <span class="card-title">test1</span>
                         </div>
